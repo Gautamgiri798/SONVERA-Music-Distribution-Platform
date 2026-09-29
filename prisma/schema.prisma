@@ -1,0 +1,466 @@
+// SONVÉRA Production Database Schema (Prisma)
+// Part IV — PostgreSQL Database Design (Pages 12-16)
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  INVITED
+}
+
+enum ReleaseType {
+  SINGLE
+  EP
+  ALBUM
+  COMPILATION
+}
+
+enum DistributionStatus {
+  DRAFT
+  VALIDATING
+  VALIDATION_FAILED
+  READY
+  SUBMITTED
+  UNDER_REVIEW
+  PROCESSING
+  DELIVERED
+  LIVE
+  REJECTED
+  TAKEDOWN_REQUESTED
+  TAKEN_DOWN
+}
+
+enum DestinationStatus {
+  PENDING
+  INGESTING
+  ACCEPTED
+  LIVE
+  FAILED
+  TAKEDOWN
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSED
+  FAILED
+  CANCELLED
+}
+
+// -------------------------------------------------------------
+// Identity
+// -------------------------------------------------------------
+model User {
+  id             String    @id @default(uuid())
+  email          String    @unique
+  passwordHash   String
+  status         UserStatus @default(ACTIVE)
+  emailVerified  Boolean   @default(false)
+  lastLoginAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  profile        Profile?
+  artists        Artist[]  @relation("UserArtists")
+  labels         Label[]   @relation("UserLabels")
+  artistMembers  ArtistMember[]
+  labelMembers   LabelMember[]
+  releasesCreated Release[] @relation("ReleaseCreator")
+  auditLogs      AuditLog[]
+
+  @@map("users")
+}
+
+model Profile {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  displayName   String?
+  firstName     String?
+  lastName      String?
+  avatarAssetId String?
+  bio           String?
+  country       String?
+  timezone      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+// -------------------------------------------------------------
+// Artists & Labels
+// -------------------------------------------------------------
+model Artist {
+  id              String   @id @default(uuid())
+  ownerUserId     String
+  artistName      String
+  slug            String   @unique
+  bio             String?
+  profileAssetId  String?
+  genre           String?
+  country         String?
+  status          String   @default("ACTIVE")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  owner           User     @relation("UserArtists", fields: [ownerUserId], references: [id])
+  members         ArtistMember[]
+  labelArtists    LabelArtist[]
+  releases        Release[]
+  royaltyAccounts RoyaltyAccount[]
+  analyticsEvents AnalyticsEvent[]
+
+  @@map("artists")
+}
+
+model Label {
+  id              String   @id @default(uuid())
+  ownerUserId     String
+  name            String
+  slug            String   @unique
+  description     String?
+  logoAssetId     String?
+  status          String   @default("ACTIVE")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  owner           User     @relation("UserLabels", fields: [ownerUserId], references: [id])
+  members         LabelMember[]
+  artists         LabelArtist[]
+  releases        Release[]
+  royaltyAccounts RoyaltyAccount[]
+
+  @@map("labels")
+}
+
+model ArtistMember {
+  id        String   @id @default(uuid())
+  artistId  String
+  userId    String
+  role      String
+  createdAt DateTime @default(now())
+
+  artist    Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([artistId, userId])
+  @@map("artist_members")
+}
+
+model LabelMember {
+  id        String   @id @default(uuid())
+  labelId   String
+  userId    String
+  role      String
+  createdAt DateTime @default(now())
+
+  label     Label    @relation(fields: [labelId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([labelId, userId])
+  @@map("label_members")
+}
+
+model LabelArtist {
+  id             String    @id @default(uuid())
+  labelId        String
+  artistId       String
+  contractStatus String    @default("ACTIVE")
+  joinedAt       DateTime  @default(now())
+  leftAt         DateTime?
+
+  label          Label     @relation(fields: [labelId], references: [id], onDelete: Cascade)
+  artist         Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@unique([labelId, artistId])
+  @@map("label_artists")
+}
+
+// -------------------------------------------------------------
+// Releases & Catalog
+// -------------------------------------------------------------
+model Release {
+  id                    String             @id @default(uuid())
+  artistId              String
+  labelId               String?
+  title                 String
+  slug                  String?
+  releaseType           ReleaseType
+  status                DistributionStatus @default(DRAFT)
+  genre                 String?
+  subgenre              String?
+  language              String?
+  releaseDate           DateTime?
+  originalReleaseDate   DateTime?
+  explicitContent       Boolean            @default(false)
+  copyrightText         String?
+  phonographicCopyright String?
+  labelName             String?
+  description           String?
+  upc                   String?            @unique
+  catalogNumber         String?
+  artworkUrl            String?
+  createdById           String
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+
+  artist                Artist             @relation(fields: [artistId], references: [id])
+  label                 Label?             @relation(fields: [labelId], references: [id])
+  createdBy             User               @relation("ReleaseCreator", fields: [createdById], references: [id])
+  tracks                Track[]
+  destinations          ReleaseDestination[]
+  submissions           DistributionSubmission[]
+  validations           ReleaseValidation[]
+  analyticsEvents       AnalyticsEvent[]
+  royaltyTransactions   RoyaltyTransaction[]
+
+  @@map("releases")
+}
+
+model Track {
+  id              String   @id @default(uuid())
+  releaseId       String
+  title           String
+  version         String?
+  trackNumber     Int
+  durationSeconds Int      @default(0)
+  isrc            String?  @unique
+  explicitContent Boolean  @default(false)
+  audioAssetId    String?
+  audioUrl        String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  release         Release  @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+  contributors    TrackContributor[]
+  analyticsEvents AnalyticsEvent[]
+  royaltyTransactions RoyaltyTransaction[]
+
+  @@map("tracks")
+}
+
+model TrackContributor {
+  id              String   @id @default(uuid())
+  trackId         String
+  name            String
+  role            String
+  sharePercentage Decimal  @db.Decimal(5, 2)
+  ipnOrIpi        String?
+  createdAt       DateTime @default(now())
+
+  track           Track    @relation(fields: [trackId], references: [id], onDelete: Cascade)
+
+  @@map("track_contributors")
+}
+
+// -------------------------------------------------------------
+// Distribution
+// -------------------------------------------------------------
+model DistributionPlatform {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  code        String   @unique
+  category    String
+  logoAssetId String?
+  active      Boolean  @default(true)
+
+  destinations ReleaseDestination[]
+
+  @@map("distribution_platforms")
+}
+
+model ReleaseDestination {
+  id                String            @id @default(uuid())
+  releaseId         String
+  platformId        String
+  status            DestinationStatus @default(PENDING)
+  submittedAt       DateTime?
+  deliveredAt       DateTime?
+  liveAt            DateTime?
+  externalReleaseId String?
+  errorCode         String?
+  errorMessage      String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  release           Release           @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+  platform          DistributionPlatform @relation(fields: [platformId], references: [id])
+  statusHistory     DistributionStatusHistory[]
+
+  @@unique([releaseId, platformId])
+  @@map("release_destinations")
+}
+
+model DistributionSubmission {
+  id                   String   @id @default(uuid())
+  releaseId            String
+  provider             String   @default("DemoDistributionProvider")
+  providerSubmissionId String?
+  status               String   @default("QUEUED")
+  submittedAt          DateTime @default(now())
+  completedAt          DateTime?
+  errorMessage         String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  release              Release  @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+
+  @@map("distribution_submissions")
+}
+
+model DistributionStatusHistory {
+  id                   String   @id @default(uuid())
+  releaseDestinationId String
+  oldStatus            String?
+  newStatus            String
+  message              String?
+  metadata             Json?
+  createdAt            DateTime @default(now())
+
+  releaseDestination   ReleaseDestination @relation(fields: [releaseDestinationId], references: [id], onDelete: Cascade)
+
+  @@map("distribution_status_history")
+}
+
+model ReleaseValidation {
+  id            String   @id @default(uuid())
+  releaseId     String
+  isValid       Boolean
+  canSubmit     Boolean
+  overallScore  Int
+  breakdown     Json
+  issues        Json
+  evaluatedAt   DateTime @default(now())
+
+  release       Release  @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+
+  @@map("release_validations")
+}
+
+// -------------------------------------------------------------
+// Analytics & Royalties (Financial Integrity)
+// -------------------------------------------------------------
+model AnalyticsEvent {
+  id         String   @id @default(uuid())
+  artistId   String
+  releaseId  String?
+  trackId    String?
+  platformId String?
+  territory  String?
+  eventDate  DateTime @db.Date
+  eventType  String   @default("stream")
+  quantity   BigInt   @default(1)
+  revenue    Decimal  @default(0) @db.Decimal(14, 4)
+  currency   String   @default("USD")
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  artist     Artist   @relation(fields: [artistId], references: [id])
+  release    Release? @relation(fields: [releaseId], references: [id])
+  track      Track?   @relation(fields: [trackId], references: [id])
+
+  @@map("analytics_events")
+}
+
+model RoyaltyAccount {
+  id        String   @id @default(uuid())
+  artistId  String?
+  labelId   String?
+  currency  String   @default("USD")
+  status    String   @default("ACTIVE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  artist    Artist?  @relation(fields: [artistId], references: [id])
+  label     Label?   @relation(fields: [labelId], references: [id])
+  transactions RoyaltyTransaction[]
+  statements   RoyaltyStatement[]
+  payouts      Payout[]
+
+  @@map("royalty_accounts")
+}
+
+model RoyaltyTransaction {
+  id               String   @id @default(uuid())
+  royaltyAccountId String
+  releaseId        String?
+  trackId          String?
+  platformId       String?
+  transactionType  String
+  amount           Decimal  @db.Decimal(18, 6)
+  currency         String   @default("USD")
+  periodStart      DateTime? @db.Date
+  periodEnd        DateTime? @db.Date
+  referenceId      String?
+  metadata         Json?
+  createdAt        DateTime @default(now())
+
+  account          RoyaltyAccount @relation(fields: [royaltyAccountId], references: [id], onDelete: Cascade)
+  release          Release?       @relation(fields: [releaseId], references: [id])
+  track            Track?         @relation(fields: [trackId], references: [id])
+
+  @@map("royalty_transactions")
+}
+
+model RoyaltyStatement {
+  id               String   @id @default(uuid())
+  royaltyAccountId String
+  periodStart      DateTime @db.Date
+  periodEnd        DateTime @db.Date
+  totalGross       Decimal  @db.Decimal(18, 6)
+  totalAdjustments Decimal  @default(0) @db.Decimal(18, 6)
+  totalNet         Decimal  @db.Decimal(18, 6)
+  currency         String   @default("USD")
+  documentAssetId  String?
+  status           String   @default("AUDITED")
+  createdAt        DateTime @default(now())
+
+  account          RoyaltyAccount @relation(fields: [royaltyAccountId], references: [id], onDelete: Cascade)
+
+  @@map("royalty_statements")
+}
+
+model Payout {
+  id                String       @id @default(uuid())
+  royaltyAccountId  String
+  amount            Decimal      @db.Decimal(18, 6)
+  currency          String       @default("USD")
+  status            PayoutStatus @default(PENDING)
+  provider          String       @default("Stripe")
+  providerReference String?
+  requestedAt       DateTime     @default(now())
+  processedAt       DateTime?
+  failureReason     String?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  account           RoyaltyAccount @relation(fields: [royaltyAccountId], references: [id], onDelete: Cascade)
+
+  @@map("payouts")
+}
+
+// -------------------------------------------------------------
+// Operations & Audit
+// -------------------------------------------------------------
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  entityType String
+  entityId   String
+  action     String
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
