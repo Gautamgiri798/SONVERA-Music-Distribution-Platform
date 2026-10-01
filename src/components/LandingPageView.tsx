@@ -2392,79 +2392,198 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
       {/* FOOTER & PRODUCTION LEGAL ARCHITECTURE SUITE */}
       <footer
         style={{
-          borderTop: '1px solid rgba(255, 255, 255, 0.12)',
-          background: '#040507',
-          padding: '64px 48px 44px',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'linear-gradient(180deg, #07090E 0%, #030406 100%)',
+          padding: '80px 48px 48px',
           color: '#E2E8F0',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
+        {/* Ambient top light beam */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '100%',
+            maxWidth: '1280px',
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(53, 213, 255, 0.4) 25%, rgba(167, 139, 250, 0.4) 75%, transparent 100%)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Ambient subtle background glow */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '-120px',
+            right: '5%',
+            width: '500px',
+            height: '350px',
+            background: 'radial-gradient(circle, rgba(167, 139, 250, 0.04) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+            pointerEvents: 'none',
+          }}
+        />
+
         <div
           style={{
             maxWidth: '1280px',
-            margin: '0 auto 44px',
+            margin: '0 auto 52px',
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '36px',
+            gap: '40px',
             textAlign: 'left',
+            position: 'relative',
+            zIndex: 1,
           }}
         >
           {/* Column 1: Brand & Blueprint */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <span style={{ fontSize: '20px', fontWeight: 900, letterSpacing: '0.08em', color: '#FFFFFF' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <span
+                style={{
+                  fontSize: '22px',
+                  fontWeight: 900,
+                  letterSpacing: '0.08em',
+                  background: 'linear-gradient(135deg, #FFFFFF 40%, #D6B36A 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
                 SONVÉRA
               </span>
               <span
                 style={{
-                  background: 'rgba(214, 179, 106, 0.2)',
+                  background: 'rgba(214, 179, 106, 0.15)',
                   color: '#E0C078',
                   fontSize: '11px',
                   fontWeight: 800,
-                  padding: '2px 8px',
-                  borderRadius: '4px',
+                  padding: '3px 8px',
+                  borderRadius: '5px',
                   border: '1px solid rgba(214, 179, 106, 0.35)',
+                  boxShadow: '0 0 10px rgba(214, 179, 106, 0.15)',
+                  letterSpacing: '0.04em',
                 }}
               >
                 PROD v1.0
               </span>
             </div>
-            <p style={{ fontSize: '13.5px', lineHeight: 1.65, color: '#CBD5E1', marginBottom: '18px' }}>
-              Authoritative music distribution architecture. DDEX ERN 4.3 XML delivery to 150+ digital service providers worldwide with cryptographic royalty accounting.
+
+            <p style={{ fontSize: '13.5px', lineHeight: 1.65, color: '#94A3B8', marginBottom: '20px' }}>
+              Authoritative music distribution architecture. Automated DDEX ERN 4.3 XML ingestion to 150+ digital service providers worldwide with cryptographic royalty accounting.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <button
                 onClick={() => openTrustCenterWithTab('status')}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  background: 'rgba(53, 229, 154, 0.12)',
-                  border: '1px solid rgba(53, 229, 154, 0.45)',
+                  gap: '9px',
+                  background: 'rgba(53, 229, 154, 0.08)',
+                  border: '1px solid rgba(53, 229, 154, 0.35)',
                   padding: '7px 14px',
-                  borderRadius: '999px',
+                  borderRadius: '9999px',
                   color: '#35E59A',
                   fontSize: '12px',
                   fontWeight: 700,
                   cursor: 'pointer',
                   width: 'fit-content',
+                  boxShadow: '0 0 16px rgba(53, 229, 154, 0.12)',
+                  transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                  outline: 'none',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(53, 229, 154, 0.16)';
+                  e.currentTarget.style.borderColor = '#35E59A';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(53, 229, 154, 0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(53, 229, 154, 0.35)';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#35E59A', boxShadow: '0 0 10px #35E59A' }} />
+                <span
+                  style={{
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    background: '#35E59A',
+                    boxShadow: '0 0 8px #35E59A',
+                    animation: 'heroPulseGlow 2s infinite',
+                  }}
+                />
                 <span>All Systems Operational (99.98% SLA)</span>
               </button>
-              <div style={{ fontSize: '12px', color: '#94A3B8', lineHeight: 1.5, fontWeight: 500 }}>
-                Governed by OWASP ASVS 5.0 L2, DPDP Act 2023 & DMCA §512
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '2px' }}>
+                {[
+                  { name: 'OWASP ASVS 5.0 L2', color: '#35D5FF' },
+                  { name: 'DPDP Act 2023', color: '#A78BFA' },
+                  { name: 'DMCA §512', color: '#D6B36A' },
+                ].map((badge, i) => (
+                  <span
+                    key={i}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      borderRadius: '6px',
+                      padding: '4px 9px',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      color: '#94A3B8',
+                      letterSpacing: '0.02em',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                    }}
+                  >
+                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: badge.color }} />
+                    {badge.name}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
 
           {/* Column 2: Legal Pillar (Section 17 & 19) */}
           <div>
-            <h4 style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#FFFFFF', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Scale size={14} color="#A78BFA" />
+            <h4
+              style={{
+                fontSize: '12.5px',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                color: '#FFFFFF',
+                marginBottom: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <div
+                style={{
+                  width: '26px',
+                  height: '26px',
+                  borderRadius: '7px',
+                  background: 'rgba(167, 139, 250, 0.12)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid rgba(167, 139, 250, 0.25)',
+                }}
+              >
+                <Scale size={13} color="#A78BFA" />
+              </div>
               <span>Legal Policies & Rights</span>
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13.5px' }}>
+
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {[
                 { slug: 'terms-of-service', label: 'Terms of Service' },
                 { slug: 'privacy-policy', label: 'Privacy Policy (DPDP & GDPR)' },
@@ -2477,20 +2596,45 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                 <li key={item.slug}>
                   <button
                     onClick={() => setSelectedPolicySlug(item.slug)}
-                    style={{ background: 'none', border: 'none', color: '#D1D5DB', cursor: 'pointer', padding: 0, fontSize: 'inherit', textAlign: 'left', transition: 'color 0.15s ease' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = '#D1D5DB')}
+                    className="footer-link-btn"
                   >
-                    {item.label}
+                    <span className="footer-bullet" />
+                    <span>{item.label}</span>
                   </button>
                 </li>
               ))}
-              <li style={{ marginTop: '4px' }}>
+              <li style={{ marginTop: '6px' }}>
                 <button
                   onClick={() => setSelectedPolicySlug('terms-of-service')}
-                  style={{ background: 'none', border: 'none', color: '#A78BFA', cursor: 'pointer', padding: 0, fontSize: '13px', fontWeight: 700, textAlign: 'left', display: 'flex', alignItems: 'center', gap: '4px' }}
+                  style={{
+                    background: 'rgba(167, 139, 250, 0.08)',
+                    border: '1px solid rgba(167, 139, 250, 0.25)',
+                    color: '#A78BFA',
+                    cursor: 'pointer',
+                    padding: '6px 12px',
+                    borderRadius: '8px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    textAlign: 'left',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    transition: 'all 0.2s ease',
+                    outline: 'none',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(167, 139, 250, 0.16)';
+                    e.currentTarget.style.borderColor = '#A78BFA';
+                    e.currentTarget.style.transform = 'translateX(3px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(167, 139, 250, 0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(167, 139, 250, 0.25)';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                  }}
                 >
-                  <span>View All 20 Policies →</span>
+                  <span>View All 20 Policies</span>
+                  <ArrowRight size={13} />
                 </button>
               </li>
             </ul>
@@ -2498,69 +2642,89 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
 
           {/* Column 3: Trust, Security & Infrastructure Pillar */}
           <div>
-            <h4 style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#FFFFFF', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <ShieldCheck size={14} color="#35D5FF" />
+            <h4
+              style={{
+                fontSize: '12.5px',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                color: '#FFFFFF',
+                marginBottom: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <div
+                style={{
+                  width: '26px',
+                  height: '26px',
+                  borderRadius: '7px',
+                  background: 'rgba(53, 213, 255, 0.12)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid rgba(53, 213, 255, 0.25)',
+                }}
+              >
+                <ShieldCheck size={13} color="#35D5FF" />
+              </div>
               <span>Trust & Security</span>
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13.5px' }}>
+
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <li>
                 <button
                   onClick={() => openTrustCenterWithTab('status')}
-                  style={{ background: 'none', border: 'none', color: '#D1D5DB', cursor: 'pointer', padding: 0, fontSize: 'inherit', textAlign: 'left', transition: 'color 0.15s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#D1D5DB')}
+                  className="footer-link-btn"
                 >
-                  Public Status Page (status.sonvera.com)
+                  <span className="footer-bullet" />
+                  <span>Public Status Page (status.sonvera.com)</span>
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => openTrustCenterWithTab('subprocessors')}
-                  style={{ background: 'none', border: 'none', color: '#D1D5DB', cursor: 'pointer', padding: 0, fontSize: 'inherit', textAlign: 'left', transition: 'color 0.15s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#D1D5DB')}
+                  className="footer-link-btn"
                 >
-                  Authorized Sub-processors Registry
+                  <span className="footer-bullet" />
+                  <span>Authorized Sub-processors Registry</span>
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => openTrustCenterWithTab('security')}
-                  style={{ background: 'none', border: 'none', color: '#D1D5DB', cursor: 'pointer', padding: 0, fontSize: 'inherit', textAlign: 'left', transition: 'color 0.15s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#D1D5DB')}
+                  className="footer-link-btn"
                 >
-                  Security Center (sonvera.com/trust)
+                  <span className="footer-bullet" />
+                  <span>Security Center (sonvera.com/trust)</span>
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => setSelectedPolicySlug('royalty-payment-terms')}
-                  style={{ background: 'none', border: 'none', color: '#D1D5DB', cursor: 'pointer', padding: 0, fontSize: 'inherit', textAlign: 'left', transition: 'color 0.15s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#D1D5DB')}
+                  className="footer-link-btn"
                 >
-                  Immutable Royalty Ledger Terms
+                  <span className="footer-bullet" />
+                  <span>Immutable Royalty Ledger Terms</span>
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => setSelectedPolicySlug('retention-deletion-policy')}
-                  style={{ background: 'none', border: 'none', color: '#D1D5DB', cursor: 'pointer', padding: 0, fontSize: 'inherit', textAlign: 'left', transition: 'color 0.15s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#D1D5DB')}
+                  className="footer-link-btn"
                 >
-                  7-Year Statutory Ledger Retention
+                  <span className="footer-bullet" />
+                  <span>7-Year Statutory Ledger Retention</span>
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => setSelectedPolicySlug('incident-response-policy')}
-                  style={{ background: 'none', border: 'none', color: '#D1D5DB', cursor: 'pointer', padding: 0, fontSize: 'inherit', textAlign: 'left', transition: 'color 0.15s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#D1D5DB')}
+                  className="footer-link-btn"
                 >
-                  Incident Response (72h SLA)
+                  <span className="footer-bullet" />
+                  <span>Incident Response (72h SLA)</span>
                 </button>
               </li>
             </ul>
@@ -2568,203 +2732,235 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
 
           {/* Column 4: Privacy Rights & Dedicated Support Intake */}
           <div>
-            <h4 style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#FFFFFF', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Lock size={14} color="#E0C078" />
-              <span>Rights & Dedicated Channels</span>
-            </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <button
-                onClick={() => setShowPrivacyRights(true)}
+            <h4
+              style={{
+                fontSize: '12.5px',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                color: '#FFFFFF',
+                marginBottom: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <div
                 style={{
-                  background: '#141822',
-                  border: '1px solid rgba(53, 229, 154, 0.3)',
-                  borderRadius: '12px',
-                  padding: '12px 16px',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#35E59A';
-                  e.currentTarget.style.background = '#181E2B';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(53, 229, 154, 0.3)';
-                  e.currentTarget.style.background = '#141822';
+                  width: '26px',
+                  height: '26px',
+                  borderRadius: '7px',
+                  background: 'rgba(214, 179, 106, 0.12)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid rgba(214, 179, 106, 0.25)',
                 }}
               >
-                <div style={{ color: '#35E59A', fontSize: '13px', fontWeight: 700, marginBottom: '3px' }}>
-                  Privacy & Data Rights Center
+                <Lock size={13} color="#E0C078" />
+              </div>
+              <span>Rights & Dedicated Channels</span>
+            </h4>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {/* Privacy Tile */}
+              <button
+                onClick={() => setShowPrivacyRights(true)}
+                className="footer-action-tile footer-action-tile-privacy"
+                style={{
+                  borderLeft: '3px solid #35E59A',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+                  <span style={{ color: '#35E59A', fontSize: '13px', fontWeight: 800 }}>
+                    Privacy & Data Rights Center
+                  </span>
+                  <ArrowRight size={13} color="#35E59A" />
                 </div>
-                <div style={{ fontSize: '12px', color: '#CBD5E1', lineHeight: 1.4 }}>
+                <div style={{ fontSize: '11.5px', color: '#94A3B8', lineHeight: 1.4 }}>
                   Self-service JSON catalog export & deletion
                 </div>
               </button>
 
+              {/* Cookie Preferences Tile */}
               <button
                 onClick={() => setShowCookiePreferences(true)}
+                className="footer-action-tile footer-action-tile-cookies"
                 style={{
-                  background: '#141822',
-                  border: '1px solid rgba(214, 179, 106, 0.3)',
-                  borderRadius: '12px',
-                  padding: '12px 16px',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#D6B36A';
-                  e.currentTarget.style.background = '#181E2B';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(214, 179, 106, 0.3)';
-                  e.currentTarget.style.background = '#141822';
+                  borderLeft: '3px solid #E0C078',
                 }}
               >
-                <div style={{ color: '#E0C078', fontSize: '13px', fontWeight: 700, marginBottom: '3px' }}>
-                  Cookie Preferences Center
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+                  <span style={{ color: '#E0C078', fontSize: '13px', fontWeight: 800 }}>
+                    Cookie Preferences Center
+                  </span>
+                  <ArrowRight size={13} color="#E0C078" />
                 </div>
-                <div style={{ fontSize: '12px', color: '#CBD5E1', lineHeight: 1.4 }}>
+                <div style={{ fontSize: '11.5px', color: '#94A3B8', lineHeight: 1.4 }}>
                   Manage telemetry & zero-ad policy
                 </div>
               </button>
 
+              {/* DMCA Tile */}
               <button
                 onClick={() => openReportingWithType('copyright')}
+                className="footer-action-tile footer-action-tile-dmca"
                 style={{
-                  background: '#141822',
-                  border: '1px solid rgba(139, 92, 246, 0.3)',
-                  borderRadius: '12px',
-                  padding: '12px 16px',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#A78BFA';
-                  e.currentTarget.style.background = '#181E2B';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.3)';
-                  e.currentTarget.style.background = '#141822';
+                  borderLeft: '3px solid #A78BFA',
                 }}
               >
-                <div style={{ color: '#FFFFFF', fontSize: '13px', fontWeight: 700, marginBottom: '3px' }}>
-                  Report Copyright / DMCA Notice
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+                  <span style={{ color: '#FFFFFF', fontSize: '13px', fontWeight: 800 }}>
+                    Report Copyright / DMCA Notice
+                  </span>
+                  <ArrowRight size={13} color="#A78BFA" />
                 </div>
-                <div style={{ fontSize: '12px', color: '#CBD5E1', lineHeight: 1.4 }}>
+                <div style={{ fontSize: '11.5px', color: '#94A3B8', lineHeight: 1.4 }}>
                   Expedited legal infringement channel
                 </div>
               </button>
 
+              {/* Secondary Quick Action Buttons */}
               <div style={{ display: 'flex', gap: '8px', marginTop: '2px' }}>
                 <button
                   onClick={() => openReportingWithType('vulnerability')}
-                  style={{
-                    flex: 1,
-                    background: '#171B26',
-                    border: '1px solid rgba(255, 255, 255, 0.14)',
-                    borderRadius: '8px',
-                    padding: '8px 10px',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    color: '#E2E8F0',
-                    cursor: 'pointer',
-                    textAlign: 'center',
-                    transition: 'all 0.15s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#FFFFFF';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#E2E8F0';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
-                  }}
+                  className="footer-secondary-btn"
                 >
-                  Report Vulnerability
+                  <Shield size={12} color="#35D5FF" />
+                  <span>Report Vulnerability</span>
                 </button>
                 <button
                   onClick={() => openReportingWithType('royalty_dispute')}
-                  style={{
-                    flex: 1,
-                    background: '#171B26',
-                    border: '1px solid rgba(255, 255, 255, 0.14)',
-                    borderRadius: '8px',
-                    padding: '8px 10px',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    color: '#E2E8F0',
-                    cursor: 'pointer',
-                    textAlign: 'center',
-                    transition: 'all 0.15s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#FFFFFF';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#E2E8F0';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
-                  }}
+                  className="footer-secondary-btn"
                 >
-                  Royalty Dispute
+                  <Scale size={12} color="#E0C078" />
+                  <span>Royalty Dispute</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom copyright line */}
-        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.12)', paddingTop: '24px', textAlign: 'center', fontSize: '13px' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', marginBottom: '10px', flexWrap: 'wrap' }}>
-            <span style={{ fontWeight: 700, color: '#FFFFFF' }}>SONVÉRA Global Distribution Platform</span>
+        {/* Bottom copyright & legal compliance line */}
+        <div
+          style={{
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+            paddingTop: '28px',
+            textAlign: 'center',
+            fontSize: '13px',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '14px',
+              marginBottom: '12px',
+              flexWrap: 'wrap',
+            }}
+          >
+            <span style={{ fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.02em' }}>
+              SONVÉRA Global Distribution Platform
+            </span>
             <span style={{ color: '#475569' }}>•</span>
             <button
               onClick={() => openTrustCenterWithTab('status')}
-              style={{ background: 'none', border: 'none', color: '#35E59A', cursor: 'pointer', padding: 0, fontWeight: 600, textDecoration: 'underline' }}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#35E59A',
+                cursor: 'pointer',
+                padding: 0,
+                fontWeight: 700,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                transition: 'opacity 0.15s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
-              System Status
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#35E59A' }} />
+              <span>System Status</span>
             </button>
             <span style={{ color: '#475569' }}>•</span>
             <button
               onClick={() => openTrustCenterWithTab('security')}
-              style={{ background: 'none', border: 'none', color: '#CBD5E1', cursor: 'pointer', padding: 0, textDecoration: 'underline', transition: 'color 0.15s ease' }}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#94A3B8',
+                cursor: 'pointer',
+                padding: 0,
+                fontWeight: 600,
+                transition: 'color 0.15s ease',
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#94A3B8')}
             >
               Trust Center
             </button>
             <span style={{ color: '#475569' }}>•</span>
             <button
               onClick={() => setShowPrivacyRights(true)}
-              style={{ background: 'none', border: 'none', color: '#CBD5E1', cursor: 'pointer', padding: 0, textDecoration: 'underline', transition: 'color 0.15s ease' }}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#94A3B8',
+                cursor: 'pointer',
+                padding: 0,
+                fontWeight: 600,
+                transition: 'color 0.15s ease',
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#94A3B8')}
             >
               Privacy & Data Rights
             </button>
             <span style={{ color: '#475569' }}>•</span>
             <button
               onClick={() => setShowCookiePreferences(true)}
-              style={{ background: 'none', border: 'none', color: '#CBD5E1', cursor: 'pointer', padding: 0, textDecoration: 'underline', transition: 'color 0.15s ease' }}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#94A3B8',
+                cursor: 'pointer',
+                padding: 0,
+                fontWeight: 600,
+                transition: 'color 0.15s ease',
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#94A3B8')}
             >
               Cookie Preferences
             </button>
             <span style={{ color: '#475569' }}>•</span>
             <button
               onClick={() => setSelectedPolicySlug('accessibility-statement')}
-              style={{ background: 'none', border: 'none', color: '#CBD5E1', cursor: 'pointer', padding: 0, textDecoration: 'underline', transition: 'color 0.15s ease' }}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#94A3B8',
+                cursor: 'pointer',
+                padding: 0,
+                fontWeight: 600,
+                transition: 'color 0.15s ease',
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#94A3B8')}
             >
               Accessibility Statement
             </button>
           </div>
-          <div style={{ color: '#94A3B8', fontSize: '12.5px', lineHeight: 1.5 }}>
-            © 2026 SONVÉRA Inc. All rights reserved. MAKE MUSIC. MOVE CULTURE. Commercial platform policy architecture.
+
+          <div style={{ color: '#64748B', fontSize: '12px', lineHeight: 1.6 }}>
+            © 2026 SONVÉRA Inc. All rights reserved. MAKE MUSIC. MOVE CULTURE. Studio-grade distribution infrastructure & cryptographic accounting.
           </div>
         </div>
       </footer>

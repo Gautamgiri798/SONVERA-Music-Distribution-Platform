@@ -95,7 +95,7 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
   };
 
   return (
-    <div style={{ perspective: 1200 }} className="w-full max-w-[420px]">
+    <div style={{ perspective: 1200 }} className="w-full max-w-[430px]">
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
@@ -104,93 +104,93 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
           rotateX,
           rotateY,
           transformStyle: 'preserve-3d',
-          background: 'rgba(12, 15, 26, 0.82)',
-          backdropFilter: 'blur(30px)',
-          WebkitBackdropFilter: 'blur(30px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'rgba(10, 13, 22, 0.82)',
+          backdropFilter: 'blur(32px)',
+          WebkitBackdropFilter: 'blur(32px)',
+          border: '1px solid rgba(168, 85, 247, 0.38)',
           boxShadow:
-            '0 30px 70px -15px rgba(0, 0, 0, 0.85), 0 0 35px rgba(124, 58, 237, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.14)',
+            '0 30px 70px -15px rgba(0, 0, 0, 0.9), 0 0 35px rgba(139, 92, 246, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
         }}
         initial={{ opacity: 0, y: 14, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -14, scale: 0.98 }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
-        className={`relative w-full rounded-[24px] p-6 sm:p-7 select-none overflow-hidden ${className}`}
+        className={`relative w-full rounded-[26px] p-7 sm:p-8 select-none overflow-hidden ${className}`}
       >
         {/* Subtle Top Specular Rim */}
         <div
           className="absolute inset-x-0 top-0 h-px pointer-events-none"
           style={{
             background:
-              'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25) 50%, transparent)',
+              'linear-gradient(90deg, transparent, rgba(192, 132, 252, 0.5) 50%, transparent)',
           }}
         />
 
-        {/* Brand Header */}
-        <div className="flex flex-col items-center justify-center space-y-1 pb-3 relative z-10">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-violet-600 via-indigo-600 to-violet-400 flex items-center justify-center shadow-[0_0_15px_rgba(124,58,237,0.4)]">
-              <div className="flex items-center gap-[2px] h-3">
-                <span className="w-[2px] h-1.5 bg-white rounded-full" />
-                <span className="w-[2px] h-2.5 bg-white rounded-full" />
+        {/* Brand Header matching reference mock */}
+        <div className="flex flex-col items-center justify-center space-y-1.5 pb-4 relative z-10">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#8B5CF6] via-[#A855F7] to-[#EC4899] flex items-center justify-center shadow-[0_0_18px_rgba(168,85,247,0.55)]">
+              <div className="flex items-center gap-[2.5px] h-3.5">
+                <span className="w-[2px] h-2 bg-white rounded-full" />
+                <span className="w-[2px] h-3.5 bg-white rounded-full" />
+                <span className="w-[2px] h-4 bg-white rounded-full" />
                 <span className="w-[2px] h-3 bg-white rounded-full" />
-                <span className="w-[2px] h-2.5 bg-white rounded-full" />
                 <span className="w-[2px] h-1.5 bg-white rounded-full" />
               </div>
             </div>
             <span
-              className="text-[19px] font-black text-white tracking-[0.08em] uppercase"
+              className="text-[20px] font-black text-white tracking-[0.06em] uppercase"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               SONVÉRA
             </span>
           </div>
           <div className="text-[10px] tracking-[0.25em] text-[#94A3B8] uppercase font-semibold">
-            ARTIST CONSOLE
+            YOUR MUSIC. GLOBAL REACH.
           </div>
         </div>
 
-        {/* Segmented Pill Switcher [ Sign In | Create Account ] */}
+        {/* Segmented Pill Switcher [ Log In | Sign Up ] matching reference image */}
         {showTabs && (
-          <div className="w-full bg-white/[0.04] p-1 rounded-xl border border-white/[0.08] flex items-center mb-4 h-10 relative z-10">
+          <div className="w-full bg-[#131726]/90 p-1 rounded-full border border-white/[0.08] flex items-center mb-5 h-11 relative z-10">
             <button
               type="button"
-              className="flex-1 h-full flex items-center justify-center text-[12.5px] font-semibold rounded-lg bg-white/[0.12] text-white shadow-sm cursor-default transition-all"
+              className="flex-1 h-full flex items-center justify-center text-[13px] font-bold rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] text-white shadow-[0_2px_12px_rgba(139,92,246,0.45)] cursor-default transition-all"
             >
-              Sign In
+              Log In
             </button>
             <button
               type="button"
               onClick={onSwitchToSignup}
-              className="flex-1 h-full flex items-center justify-center text-[12.5px] font-medium text-[#94A3B8] hover:text-white rounded-lg transition-all cursor-pointer"
+              className="flex-1 h-full flex items-center justify-center text-[13px] font-medium text-[#94A3B8] hover:text-white rounded-full transition-all cursor-pointer"
             >
-              Create Account
+              Sign Up
             </button>
           </div>
         )}
 
-        {/* Heading & Subtitle */}
-        <div className="text-center space-y-0.5 pb-3.5 relative z-10">
+        {/* Heading & Subtitle matching reference mock */}
+        <div className="text-center space-y-1 pb-4 relative z-10">
           <h2
-            className="text-[21px] font-bold tracking-tight text-white"
+            className="text-[22px] sm:text-[24px] font-extrabold tracking-tight text-white"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             Welcome back
           </h2>
-          <p className="text-[12px] text-[#94A3B8]">
-            Enter your email and password to access your catalog
+          <p className="text-[13px] text-[#94A3B8]">
+            Sign in to your artist workspace
           </p>
         </div>
 
-        {/* Social Logins */}
-        <div className="grid grid-cols-2 gap-2 relative z-10">
+        {/* Full-width Stacked Social Buttons matching reference image */}
+        <div className="flex flex-col gap-2.5 relative z-10">
           <button
             type="button"
             onClick={() => handleSocialAuth('google')}
             disabled={status === 'loading'}
-            className="h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 text-white flex items-center justify-center space-x-2 px-3 transition-all duration-150 cursor-pointer disabled:opacity-50 text-[12px] font-medium"
+            className="w-full h-11 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-white/20 text-white flex items-center justify-center space-x-2.5 px-4 transition-all duration-150 cursor-pointer disabled:opacity-50 text-[13px] font-semibold"
           >
-            <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
               <path
                 fill="#EA4335"
                 d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.9C6.2 7.2 8.9 5 12 5z"
@@ -208,27 +208,27 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
                 d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.2-6.7-5.3L1.6 16c1.9 3.8 5.8 7 10.4 7z"
               />
             </svg>
-            <span>Google</span>
+            <span>Continue with Google</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleSocialAuth('apple')}
             disabled={status === 'loading'}
-            className="h-9 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 text-white flex items-center justify-center space-x-2 px-3 transition-all duration-150 cursor-pointer disabled:opacity-50 text-[12px] font-medium"
+            className="w-full h-11 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-white/20 text-white flex items-center justify-center space-x-2.5 px-4 transition-all duration-150 cursor-pointer disabled:opacity-50 text-[13px] font-semibold"
           >
-            <svg className="w-3.5 h-3.5 shrink-0 fill-current text-white" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 shrink-0 fill-current text-white" viewBox="0 0 24 24">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.47c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.96 2.77 1 .08 2.08-.52 2.69-1.27z" />
             </svg>
-            <span>Apple</span>
+            <span>Continue with Apple</span>
           </button>
         </div>
 
-        {/* Divider */}
-        <div className="flex items-center my-3 space-x-3 select-none relative z-10">
+        {/* Divider with OR matching reference image */}
+        <div className="flex items-center my-4 space-x-3 select-none relative z-10">
           <div className="flex-1 h-px bg-white/[0.08]" />
-          <span className="text-[9.5px] tracking-[0.2em] text-[#64748B] uppercase font-semibold">
-            OR WITH EMAIL
+          <span className="text-[10px] tracking-[0.2em] text-[#64748B] uppercase font-bold">
+            OR
           </span>
           <div className="flex-1 h-px bg-white/[0.08]" />
         </div>
@@ -242,10 +242,10 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
         )}
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-3 relative z-10" noValidate>
+        <form onSubmit={handleSubmit} className="space-y-3.5 relative z-10" noValidate>
           {/* Email */}
           <div className="space-y-1">
-            <label className="block text-[11px] font-semibold text-[#CBD5E1]">
+            <label className="block text-[12px] font-semibold text-[#CBD5E1]">
               Email address
             </label>
             <div className="relative">
@@ -256,19 +256,19 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
               />
               <input
                 type="email"
-                placeholder="name@example.com"
+                placeholder="you@example.com"
                 value={email}
                 onFocus={() => setEmailFocused(true)}
                 onBlur={() => setEmailFocused(false)}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-10 pl-11 pr-4 rounded-xl bg-white/[0.03] border border-white/[0.1] text-white text-[13px] placeholder-[#475569] focus:outline-none focus:border-violet-500/80 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/30 transition-all shadow-inner"
+                className="w-full h-11 pl-11 pr-4 rounded-xl bg-white/[0.03] border border-white/[0.1] text-white text-[13.5px] placeholder-[#475569] focus:outline-none focus:border-violet-500/80 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/40 transition-all shadow-inner"
               />
             </div>
           </div>
 
           {/* Password */}
           <div className="space-y-1">
-            <label className="block text-[11px] font-semibold text-[#CBD5E1]">
+            <label className="block text-[12px] font-semibold text-[#CBD5E1]">
               Password
             </label>
             <div className="relative">
@@ -279,12 +279,12 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
               />
               <input
                 type={showPassword ? 'text' : 'password'}
-                placeholder="Enter password"
+                placeholder="Enter your password"
                 value={password}
                 onFocus={() => setPasswordFocused(true)}
                 onBlur={() => setPasswordFocused(false)}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full h-10 pl-11 pr-10 rounded-xl bg-white/[0.03] border border-white/[0.1] text-white text-[13px] placeholder-[#475569] focus:outline-none focus:border-violet-500/80 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/30 transition-all shadow-inner"
+                className="w-full h-11 pl-11 pr-11 rounded-xl bg-white/[0.03] border border-white/[0.1] text-white text-[13.5px] placeholder-[#475569] focus:outline-none focus:border-violet-500/80 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/40 transition-all shadow-inner"
               />
               <button
                 type="button"
@@ -297,14 +297,14 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
             </div>
           </div>
 
-          {/* Remember me & Forgot Password */}
-          <div className="flex items-center justify-between pt-0.5 text-[11px]">
+          {/* Remember me & Forgot Password matching reference image */}
+          <div className="flex items-center justify-between pt-0.5 text-[12px]">
             <div
               onClick={() => setRememberMe(!rememberMe)}
               className="flex items-center space-x-2 cursor-pointer select-none group"
             >
               <div
-                className={`w-3.5 h-3.5 rounded-[4px] flex items-center justify-center transition-all ${
+                className={`w-4 h-4 rounded-[4px] flex items-center justify-center transition-all ${
                   rememberMe
                     ? 'bg-violet-600 text-white shadow-[0_0_8px_rgba(124,58,237,0.5)]'
                     : 'bg-white/5 border border-white/20 group-hover:border-white/40'
@@ -324,18 +324,18 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
             <button
               type="button"
               onClick={onForgotPassword}
-              className="font-medium text-violet-400 hover:text-violet-300 transition-colors cursor-pointer"
+              className="font-medium text-[#C084FC] hover:text-[#E879F9] transition-colors cursor-pointer"
             >
               Forgot password?
             </button>
           </div>
 
-          {/* Primary CTA */}
-          <div className="pt-1.5">
+          {/* Primary CTA: Gradient Sign In -> matching reference image */}
+          <div className="pt-2">
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full h-10 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-500 text-white font-semibold text-[13.5px] shadow-[0_4px_20px_rgba(124,58,237,0.35)] hover:shadow-[0_4px_26px_rgba(124,58,237,0.55)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-60"
+              className="w-full h-11 rounded-xl bg-gradient-to-r from-[#A855F7] via-[#8B5CF6] to-[#3B82F6] text-white font-bold text-[14px] shadow-[0_4px_24px_rgba(168,85,247,0.45)] hover:shadow-[0_4px_30px_rgba(168,85,247,0.65)] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-60"
             >
               {status === 'loading' ? (
                 <>
@@ -357,24 +357,19 @@ export const LoginSection: React.FC<LoginSectionProps> = ({
           </div>
         </form>
 
-        {/* Footer */}
-        <div className="text-center pt-3 text-[11.5px] text-[#94A3B8] relative z-10">
+        {/* Footer Link matching reference image */}
+        <div className="text-center pt-4 text-[12px] text-[#94A3B8] relative z-10">
           Don&apos;t have an account?{' '}
           <button
             type="button"
             onClick={onSwitchToSignup}
-            className="text-violet-400 hover:text-violet-300 font-semibold hover:underline underline-offset-2 transition-colors ml-0.5 cursor-pointer"
+            className="text-[#C084FC] hover:text-[#E879F9] font-bold hover:underline underline-offset-2 transition-colors ml-0.5 cursor-pointer"
           >
             Create account
           </button>
-        </div>
-
-        {/* Security Seal */}
-        <div className="flex items-center justify-center gap-1.5 pt-2.5 mt-1 border-t border-white/[0.06] text-[10px] text-[#64748B] relative z-10">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          <span>256-Bit SSL Encrypted • DDEX ERN 4.3 Node</span>
         </div>
       </motion.div>
     </div>
   );
 };
+
