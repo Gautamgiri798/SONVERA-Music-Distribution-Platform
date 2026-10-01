@@ -35,22 +35,22 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       whileTap={{ scale: 0.985 }}
       style={{
         height: '48px',
-        borderRadius: '12px',
+        borderRadius: '9999px',
         background: isSuccess
           ? '#35E59A'
-          : 'linear-gradient(135deg, #7C3AED 0%, #8B5CF6 45%, #A855F7 100%)',
+          : 'linear-gradient(90deg, #A855F7 0%, #8B5CF6 45%, #38BDF8 100%)',
         color: isSuccess ? '#080A10' : '#FFFFFF',
         boxShadow: isSuccess
           ? '0 0 30px rgba(53, 229, 154, 0.35)'
-          : '0 6px 30px -5px rgba(139, 92, 246, 0.5), 0 0 15px -3px rgba(168, 85, 247, 0.3)',
+          : '0 0 25px rgba(168, 85, 247, 0.4), 0 6px 20px rgba(56, 189, 248, 0.2)',
       }}
-      className={`relative w-full font-bold text-[12px] tracking-[0.08em] uppercase transition-all duration-300 flex items-center justify-center space-x-2 border-none cursor-pointer overflow-hidden group select-none ${className} disabled:opacity-60 disabled:cursor-not-allowed`}
+      className={`relative w-full font-bold text-[13.5px] transition-all duration-300 flex items-center justify-center space-x-2 border-none cursor-pointer overflow-hidden group select-none ${className} disabled:opacity-60 disabled:cursor-not-allowed`}
     >
       {/* Subtle Shimmer */}
       <div
         className="absolute inset-0 w-1/2 h-full pointer-events-none animate-shimmer"
         style={{
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
         }}
       />
 
@@ -65,9 +65,9 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           <span>{successLabel}</span>
         </div>
       ) : (
-        <div className="flex items-center space-x-2 z-10">
+        <div className="flex items-center space-x-1.5 z-10 font-bold">
           <span>{label}</span>
-          <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       )}
     </motion.button>

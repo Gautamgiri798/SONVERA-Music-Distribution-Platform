@@ -33,13 +33,7 @@ export function App() {
       hash === '#product' ||
       hash === '#pricing' ||
       hash === '#labels' ||
-      hash === '#resources' ||
-      hash === '#login' ||
-      hash === '#register' ||
-      hash === '#onboarding' ||
-      hash === '#verify-email' ||
-      hash === '#mfa' ||
-      hash === '#forgot-password'
+      hash === '#resources'
     ) {
       return true;
     }
@@ -90,21 +84,12 @@ export function App() {
 
       if (isLandingPage) {
         const curHash = window.location.hash.toLowerCase();
-        const curPath = window.location.pathname.toLowerCase();
-        const isAuthPath = ['/login', '/register', '/forgot-password', '/auth/callback'].some(p => curPath.startsWith(p));
         if (
-          !isAuthPath &&
           ![
             '#product',
             '#pricing',
             '#labels',
             '#resources',
-            '#login',
-            '#register',
-            '#onboarding',
-            '#verify-email',
-            '#forgot-password',
-            '#mfa',
           ].includes(curHash)
         ) {
           window.history.replaceState(null, '', '#landing');

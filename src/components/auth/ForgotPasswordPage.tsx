@@ -30,7 +30,7 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onNaviga
   };
 
   return (
-    <AuthCard>
+    <AuthCard showTabs={false}>
       <div className="text-center space-y-1 pb-5">
         <h2
           className="text-[24px] sm:text-[26px] font-bold tracking-tight text-[#F8F7F4]"

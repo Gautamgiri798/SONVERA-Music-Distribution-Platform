@@ -19,6 +19,7 @@ interface AuthViewProps {
 export const AuthView: React.FC<AuthViewProps> = ({
   initialMode,
   onAuthSuccess,
+  onClose,
   onEnterAdmin,
 }) => {
   // Detect route from window pathname or hash
@@ -52,12 +53,27 @@ export const AuthView: React.FC<AuthViewProps> = ({
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Listen to Escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && onClose) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   return (
     <div
       className="fixed inset-0 z-50 overflow-y-auto"
-      style={{ backgroundColor: '#05060A' }}
+      style={{ backgroundColor: '#06070B' }}
     >
-      <AuthLayout mode={routeMode}>
+      <AuthLayout
+        mode={routeMode}
+        onClose={onClose}
+        onNavigateMode={navigateTo}
+      >
         {routeMode === 'login' && (
           <LoginPage
             onSuccess={(email) => {

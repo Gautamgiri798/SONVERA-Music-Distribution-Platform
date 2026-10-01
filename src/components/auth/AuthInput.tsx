@@ -70,21 +70,21 @@ export const AuthInput: React.FC<AuthInputProps> = ({
           onChange={onChange}
           required={required}
           style={{
-            height: '44px',
+            height: '46px',
             paddingLeft: icon ? '42px' : '14px',
             paddingRight: isPassword ? '42px' : '14px',
-            borderRadius: '11px',
-            background: 'rgba(255, 255, 255, 0.035)',
+            borderRadius: '12px',
+            background: '#10131F',
             border: error
-              ? '1px solid rgba(239, 68, 68, 0.6)'
-              : '1px solid rgba(255, 255, 255, 0.07)',
+              ? '1px solid rgba(239, 68, 68, 0.7)'
+              : '1px solid rgba(255, 255, 255, 0.1)',
             color: '#F8F7F4',
-            fontSize: '13px',
+            fontSize: '13.5px',
             width: '100%',
             outline: 'none',
             transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
           }}
-          className="focus:border-[#8B5CF6]/70 focus:ring-1 focus:ring-[#8B5CF6]/25 placeholder:text-[#50546A]"
+          className="focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 placeholder:text-[#555A6E]"
         />
 
         {/* Password Toggle */}

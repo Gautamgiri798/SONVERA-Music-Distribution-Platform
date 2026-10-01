@@ -2,12 +2,12 @@ import React from 'react';
 
 export const AuthDivider: React.FC<{ label?: string }> = ({ label = 'OR' }) => {
   return (
-    <div className="flex items-center my-3.5 space-x-3 select-none">
-      <div className="flex-1 h-px bg-white/8" />
-      <span className="text-[10px] font-mono tracking-[0.15em] text-[#6B7084] uppercase font-medium">
+    <div className="flex items-center my-4 space-x-3 select-none">
+      <div className="flex-1 h-px bg-white/10" />
+      <span className="text-[11px] tracking-[0.2em] text-[#64748B] uppercase font-semibold">
         {label}
       </span>
-      <div className="flex-1 h-px bg-white/8" />
+      <div className="flex-1 h-px bg-white/10" />
     </div>
   );
 };

@@ -24,12 +24,12 @@ export const SocialButton: React.FC<SocialButtonProps> = ({
       transition={{ duration: 0.15 }}
       style={{
         height: '46px',
-        borderRadius: '11px',
-        background: 'rgba(255, 255, 255, 0.03)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        borderRadius: '12px',
+        background: '#131622',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
         color: '#F8F7F4',
       }}
-      className="w-full flex items-center justify-center space-x-2.5 px-4 hover:border-violet-500/40 active:bg-white/[0.02] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+      className="w-full flex items-center justify-center space-x-2.5 px-4 hover:bg-[#1A1E2E] hover:border-violet-500/40 active:scale-[0.99] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
     >
       {provider === 'google' ? (
         <svg className="w-[16px] h-[16px] shrink-0" viewBox="0 0 24 24">
